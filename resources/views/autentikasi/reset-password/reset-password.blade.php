@@ -54,7 +54,7 @@
                                     </div>
                                     <div class="text-center mt-4">
                                         <p class="text-dark mb-0">Forgot It?<a class="text-primary ms-1"
-                                                href="javascript:void(0);">Send me Back</a></p>
+                                                href="{{ url('/login') }}">Send me Back</a></p>
                                     </div>
                                 </div>
                             </div>

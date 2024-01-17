@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\SuperAdmin\Master\PositionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +56,7 @@ Route::group(['middleware' => ['autentikasi']], function () {
         Route::prefix('superadmin')->group(function () {
             Route::get('dashboard', [AppController::class, 'superadmin']);
             Route::resource('create/admin', AdminController::class);
+            Route::resource('master/position', PositionController::class);
         });
     });
     Route::group(['middleware' => ['can:admin']], function () {

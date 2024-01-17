@@ -5,7 +5,9 @@
             <!-- CONTAINER OPEN -->
             <div class="col col-login mx-auto mt-7">
                 <div class="text-center">
-                    <img src="{{ url('/assets') }}/images/polindra.png" class="header-brand-img" alt="">
+                    <img src="{{ url('/assets') }}/images/polindra.png" class="header-brand-img img-fluid" alt="Polindra Logo"
+                        style="height: 100px; width: auto;">
+                    <h1 class="h4 mt-3">Sibatik</h1>
                 </div>
             </div>
             <div class="container-login100">
