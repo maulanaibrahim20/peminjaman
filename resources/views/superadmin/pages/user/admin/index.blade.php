@@ -1,24 +1,37 @@
-@extends('admin.dashboard')
+@extends('superadmin.dashboard')
 @section('content')
     <div class="page-header">
         <div>
-            <h1 class="page-title">Dashboard 01</h1>
+            <h1 class="page-title">Admin Table</h1>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0);">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Dashboard 01</li>
+                <li class="breadcrumb-item active" aria-current="page">Admin Table </li>
             </ol>
         </div>
         <div class="ms-auto pageheader-btn">
-            <a class="btn btn-primary " data-bs-target="#modaldemo1" data-bs-toggle="modal" href="">Tambah Data
-                Client</a>
+            <a class="btn btn-primary " href="{{ url('/superadmin/create/admin/create') }}">Tambah Data
+                Admin</a>
         </div>
     </div>
     <!-- PAGE-HEADER END -->
     <div class="row row-sm">
         <div class="col-lg-12">
             <div class="card">
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+
+                @if (session('error'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ session('error') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
                 <div class="card-header">
-                    <h3 class="card-title">Responsive DataTable</h3>
+                    <h3 class="card-title">Data Admin Table</h3>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -26,11 +39,9 @@
                             <thead>
                                 <tr>
                                     <th class="wd-15p border-bottom-0">No</th>
-                                    <th class="wd-15p border-bottom-0">id customer</th>
                                     <th class="wd-15p border-bottom-0">nama</th>
-                                    <th class="wd-20p border-bottom-0">Alamat</th>
-                                    <th class="wd-15p border-bottom-0">No Telepon</th>
-                                    <th class="wd-15p border-bottom-0">Username</th>
+                                    <th class="wd-20p border-bottom-0">email</th>
+                                    <th class="wd-15p border-bottom-0">position</th>
                                     <th class="wd-15p border-bottom-0">action</th>
                                 </tr>
                             </thead>
@@ -38,15 +49,14 @@
                                 @foreach ($user as $data)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $data->id_customer }}</td>
-                                        <td>{{ $data->getCustomer->name }}</td>
-                                        <td>{{ $data->getCustomer->alamat }}</td>
-                                        <td>{{ $data->getCustomer->no_tlp }}</td>
-                                        <td>{{ $data->getCustomer->username }}</td>
+                                        <td>{{ $data->user->name }}</td>
+                                        <td>{{ $data->user->email }}</td>
+                                        <td>{{ $data->position }}</td>
                                         <td class="text-center">
                                             <a class="btn btn-warning" data-bs-target="#modaldemo2{{ $data->id }}"
                                                 data-bs-toggle="modal" href=""><i class="fa fa-edit"></i></a>
-                                            <form method="POST" action="{{ url('/admin/data_client/' . $data->id) }}">
+                                            <form style="display: inline" method="POST"
+                                                action="{{ url('/admin/data_client/' . $data->id) }}">
                                                 @method('delete')
                                                 @csrf
                                                 <button type="submit" onclick="return confirm('apakah data ingin dihapus')"
@@ -65,7 +75,7 @@
         </div>
     </div>
     {{-- Create Modal --}}
-    <div class="modal fade" id="modaldemo1">
+    {{-- <div class="modal fade" id="modaldemo1">
         <div class="modal-dialog" role="document">
             <div class="modal-content modal-content-demo">
                 <div class="modal-header">
@@ -119,11 +129,11 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> --}}
     {{-- Create Modal --}}
 
     {{-- Start Edit Modal --}}
-    @foreach ($user as $edit)
+    {{-- @foreach ($user as $edit)
         <div class="modal fade" id="modaldemo2{{ $edit->id }}">
             <div class="modal-dialog" role="document">
                 <div class="modal-content modal-content-demo">
@@ -175,6 +185,6 @@
                 </div>
             </div>
         </div>
-    @endforeach
+    @endforeach --}}
     {{-- End Edit Modal --}}
 @endsection

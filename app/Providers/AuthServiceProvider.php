@@ -5,6 +5,8 @@ namespace App\Providers;
 // use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Auth\Notifications\ResetPassword;
+
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -44,6 +46,10 @@ class AuthServiceProvider extends ServiceProvider
             } else {
                 return $user->getAkses->id == 3;
             }
+        });
+
+        ResetPassword::createUrlUsing(function ($user, string $token) {
+            return url("/new-password?token=$token&email=$user->email");
         });
     }
 }

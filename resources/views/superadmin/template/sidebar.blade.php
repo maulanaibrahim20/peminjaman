@@ -41,7 +41,7 @@
                         <h3>Auth</h3>
                     </li>
                     <li class="slide">
-                        <a class="side-menu__item {{ in_array(Request::segment(2), ['data_client', 'data_owner']) ? 'active' : '' }}"
+                        <a class="side-menu__item {{ in_array(Request::segment(3), ['admin']) ? 'active' : '' }}"
                             data-bs-toggle="slide" href="javascript:void(0);">
                             <i class="side-menu__icon fe fe-layers"></i>
                             <span class="side-menu__label">Buat Akun</span>
@@ -56,6 +56,28 @@
                                 <a href="{{ url('/superadmin/create/admin') }}"
                                     class="slide-item {{ Request::segment(3) == 'admin' ? 'active' : '' }}"> Akun
                                     Admin</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="sub-category">
+                        <h3>Master</h3>
+                    </li>
+                    <li class="slide">
+                        <a class="side-menu__item {{ in_array(Request::segment(3), ['position']) ? 'active' : '' }}"
+                            data-bs-toggle="slide" href="javascript:void(0);">
+                            <i class="side-menu__icon fa fa-database"></i>
+                            <span class="side-menu__label">Master</span>
+                            <i class="angle fa fa-angle-right"></i>
+                        </a>
+                        <ul class="slide-menu"
+                            style="{{ in_array(Request::segment(3), ['position']) ? 'display: block;' : 'display:none;' }}">
+                            <li class="side-menu-label1">
+                                <a href="javascript:void(0)">Master</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('/superadmin/master/position') }}"
+                                    class="slide-item {{ Request::segment(3) == 'position' ? 'active' : '' }}"> Admin
+                                    Position</a>
                             </li>
                         </ul>
                     </li>

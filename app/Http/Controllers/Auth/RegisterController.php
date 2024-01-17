@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Auth\Controllers;
 
 use App\Models\Customer;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Http\Controllers\Controller;
 
 class RegisterController extends Controller
 {
@@ -18,7 +19,7 @@ class RegisterController extends Controller
     {
         // dd($request->all());
         try {
-            $user = User::create([
+            User::create([
                 'name' => $request->name,
                 'username' => str::slug($request->name),
                 'email' => $request->email,
@@ -26,11 +27,6 @@ class RegisterController extends Controller
                 'no_tlp' => $request->no_tlp,
                 'alamat' => $request->alamat,
                 'role_id' => '3',
-            ]);
-            Customer::create([
-                "id_customer" => "CUST-" . date("YmdHis"),
-                'user_id' => $user->id,
-                'pekerjaan' => $request->pekerjaan,
             ]);
             Alert::success('Register Berhasil, Silahkan Login');
             return redirect('/login');

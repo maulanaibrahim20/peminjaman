@@ -1,18 +1,14 @@
 <?php
 
-use App\Http\Controllers\admin\ContentController;
-use App\Http\Controllers\Admin\DataClientController;
+use App\Http\Auth\Controllers\RegisterController;
 use App\Http\Controllers\SuperAdmin\User\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingController;
-use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AppController;
-use App\Http\Controllers\BookingController;
-use App\Http\Controllers\client\ClientBookingController;
-use App\Http\Controllers\DataOwnerController;
-use App\Http\Controllers\Owner\KatalogMakeupController;
-use App\Http\Controllers\Owner\TypeMakeupController;
-use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\NewPasswordController;
+use App\Http\Controllers\Auth\VerificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,16 +21,36 @@ use App\Http\Controllers\RegisterController;
 |
 */
 
-
 Route::middleware(['guest'])->group(function () {
     Route::get('/', [LandingController::class, 'index']);
-    Route::get('/login', [LoginController::class, 'index']);
-    Route::post('/login', [LoginController::class, 'login'])->name('login');
-    Route::resource('/register', RegisterController::class);
+
+    Route::prefix('login')->group(function () {
+        Route::get('/', [LoginController::class, 'index']);
+        Route::post('/', [LoginController::class, 'login'])->name('login');
+    });
+
+    Route::prefix('register')->group(function () {
+        Route::get('/', [RegisterController::class, 'index']);
+        Route::post('/', [RegisterController::class, 'register'])->name('register');
+    });
+
+    Route::prefix('reset-password')->name('reset-password.')->group(function () {
+        Route::get('/', [ResetPasswordController::class, 'index']);
+        Route::post('/', [ResetPasswordController::class, 'process'])->name('process');
+    });
+
+    Route::prefix('new-password')->name('new-password.')->group(function () {
+        Route::get('/', [NewPasswordController::class, 'index']);
+        Route::post('/', [NewPasswordController::class, 'process'])->name('process');
+    });
+
+    Route::get('verification', VerificationController::class)
+        ->name('verification');
 });
 
 
 Route::group(['middleware' => ['autentikasi']], function () {
+
     Route::group(['middleware' => ['can:superadmin']], function () {
         Route::prefix('superadmin')->group(function () {
             Route::get('dashboard', [AppController::class, 'superadmin']);

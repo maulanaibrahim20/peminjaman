@@ -41,11 +41,11 @@
                 <li>
                     @if (Auth::check())
                         @if (Auth::user()->role_id == 1)
-                            <a href="{{ url('/admin/dashboard') }}">
+                            <a href="{{ url('/superadmin/dashboard') }}">
                                 <span class="fa fa-home"> Dashboard</span>
                             </a>
                         @elseif (Auth::user()->role_id == 2)
-                            <a href="{{ url('/owner/dashboard') }}">
+                            <a href="{{ url('/admin/dashboard') }}">
                                 <span class="fa fa-home"> Dashboard</span>
                             </a>
                         @elseif (Auth::user()->role_id == 3)
@@ -53,7 +53,7 @@
                     <a href="rooms.html">Selamat Datang, {{ Auth::user()->name }}</a>
                     <ul class="dropdown">
                         <li>
-                            <a href="{{ url('/client/dashboard') }}">Dashboard</a>
+                            <a href="{{ url('/mahasiswa/dashboard') }}">Dashboard</a>
                         </li>
                         <li>
                             <a href="{{ url('/logout') }}">Logout</a>

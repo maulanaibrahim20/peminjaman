@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -19,11 +20,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'username',
         'email',
         'password',
-        'alamat',
-        'no_tlp',
         'role_id',
     ];
 
@@ -46,6 +44,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function setFillableAttributes()
+    {
+        if ($this->role_id === 'ADMIN' || 'MAHASISWA' || 'SUPERADMIN') {
+            $this->fillable[] = 'email_verified_at';
+            $this->fillable[] = 'remember_token';
+        }
+    }
+
     public function getAkses()
     {
         return $this->belongsTo("App\Models\Role", "role_id", "id");
