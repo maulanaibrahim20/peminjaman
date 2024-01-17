@@ -58,11 +58,11 @@ class NewPasswordController extends Controller
 
             DB::commit();
             if ($status == Password::PASSWORD_RESET) {
-                Alert::succes('success', 'Selamat password anda berhasil diubah!');
-                return redirect('/login')->with('Success', 'Selamat password anda berhasil diubah!');
+                Alert::success('success', 'Selamat password anda berhasil diubah!');
+                return redirect('/login')->with('success', 'Selamat password anda berhasil diubah!');
             } else {
-                Alert::error('success', 'Maaf token sudah kedaluwarsa, silahkan lakukan reset password!');
-                return redirect('/login')->with('Error', 'Maaf token sudah kedaluwarsa, silahkan lakukan reset password!');
+                Alert::warning('Warning', 'Maaf token sudah kedaluwarsa, silahkan lakukan reset password!');
+                return redirect('/login')->with('error', 'Maaf token sudah kedaluwarsa, silahkan lakukan reset password!');
             }
         } catch (\Throwable $e) {
             DB::rollback();

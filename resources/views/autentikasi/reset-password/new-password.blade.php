@@ -35,6 +35,11 @@
                                         {{ session('danger') }}
                                     </div>
                                 @endif
+                                @if (session('success'))
+                                    <div class="alert alert-danger">
+                                        {{ session('success') }}
+                                    </div>
+                                @endif
                                 <form id="formAuthentication" class="mb-3"
                                     action="{{ route('new-password.process', ['token' => request('token'), 'email' => request('email')]) }} "
                                     method="POST" novalidate>

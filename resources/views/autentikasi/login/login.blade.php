@@ -11,6 +11,26 @@
             <div class="container-login100">
                 <div class="wrap-login100 p-0">
                     <div class="card-body">
+                        @if (session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+                        @if (session('warning'))
+                            <div class="alert alert-warning">
+                                {{ session('warning') }}
+                            </div>
+                        @endif
+                        @if (session('danger'))
+                            <div class="alert alert-danger">
+                                {{ session('danger') }}
+                            </div>
+                        @endif
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
                         <form action="{{ route('login') }}" method="POST" class="login100-form validate-form">
                             @csrf
                             <span class="login100-form-title">
